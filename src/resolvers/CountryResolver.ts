@@ -7,13 +7,16 @@ import { GraphQLError } from "graphql";
 export default class CountryResolver {
   @Query(() => [Country])
   async countries() {
-    return Country.find();
+    return Country.find({
+      relations: { continent: true },
+    });
   }
 
   @Query(() => Country)
-  async getCountryByCode(@Arg("code") code: string) {
+  async getCountryByCode(@Arg("countryCode") code: string) {
     const country = await Country.findOne({
       where: { code },
+      relations: { continent: true },
     });
     if (!country) {
       throw new GraphQLError("Country not found");
@@ -30,6 +33,7 @@ export default class CountryResolver {
       where: {
         id,
       },
+      relations: { continent: true },
     });
   }
 }

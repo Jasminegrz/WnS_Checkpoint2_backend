@@ -24,6 +24,6 @@ export default class Continent extends BaseEntity {
   name: string;
 
   @OneToMany(() => Country, (country) => country.continent)
-  @Field(() => [Country])
+  @Field(() => [Country], { nullable: true })
   countries: Country[];
 }
