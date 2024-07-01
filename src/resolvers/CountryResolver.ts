@@ -1,6 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Country from "../entities/Country";
-import { NewCountryInputType } from "../types/NewContryInputType";
+import { NewCountryInputType } from "../types/NewCountryInputType";
 import { GraphQLError } from "graphql";
 
 @Resolver(Country)

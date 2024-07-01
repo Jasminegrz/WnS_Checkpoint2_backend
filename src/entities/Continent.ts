@@ -3,14 +3,14 @@ import {
   BaseEntity,
   Column,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Continent from "./Continent";
+import Country from "./Country";
 
 @Entity()
 @ObjectType()
-export default class Country extends BaseEntity {
+export default class Continent extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id: number;
@@ -23,11 +23,7 @@ export default class Country extends BaseEntity {
   @Field()
   name: string;
 
-  @Column()
-  @Field()
-  emoji: string;
-
-  @ManyToOne(() => Continent, (continent) => continent.countries)
-  @Field(() => Continent)
-  continent: Continent;
+  @OneToMany(() => Country, (country) => country.continent)
+  @Field(() => [Country])
+  countries: Country[];
 }
